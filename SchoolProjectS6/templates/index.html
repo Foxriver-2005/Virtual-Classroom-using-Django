@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+
+    <!-- font awesome cdn link -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="{% static 'homepage/css/styles.css' %}" />
+  </head>
+  <body>
+    <!-- header section starts -->
+    <header>
+      <a href="#home" class="logo"><span>Home</span>Page</a>
+      <input type="checkbox" id="menu-bar" />
+      <label for="menu-bar" class="fas fa-bars"></label>
+
+      <nav class="navbar">
+        <a href="#home">home</a>
+        <a href="#features">features</a>
+        <a href="#about">about</a>
+        <a class="btn" style="color: #fff" onclick="openForm()">Log In</a>
+        <a class="btn" style="color: #fff" onclick="openRegisterForm()"
+          >Register</a
+        >
+      </nav>
+    </header>
+    <!-- header section ends -->
+
+    <!-- home section starts -->
+    <section class="home" id="home">
+      <div class="content">
+        <h3>online class <span>management</span></h3>
+        <p>Get more time to teach and inspire learners with Classroom.</p>
+        <a href="#" class="btn" onclick="openForm()">Login</a>
+        <a href="#" class="btn" onclick="openRegisterForm()">Register</a>
+      </div>
+      <div class="image">
+        <img src="{% static 'homepage/images/home-img.png' %}" alt="" />
+      </div>
+    </section>
+    <!-- home section ends -->
+
+    <!-- features section starts -->
+    <section class="features" id="features">
+      <h1 class="heading">features</h1>
+      <div class="box-container">
+        <div class="box">
+          <img src="{% static 'homepage/images/manage.svg' %}" alt="" />
+          <h3>MANAGE</h3>
+          <p>Simplify teaching and learning</p>
+          <a class="btn">read more</a>
+        </div>
+
+        <div class="box">
+          <img src="{% static 'homepage/images/measure.svg' %}" alt="" />
+          <h3>MEASURE</h3>
+          <p>Move students forward</p>
+          <a class="btn">read more</a>
+        </div>
+
+        <div class="box">
+          <img src="{% static 'homepage/images/collaborate.svg' %}" alt="" />
+          <h3>COLLABORATE</h3>
+          <p>Strengthen student connections</p>
+          <a class="btn">read more</a>
+        </div>
+      </div>
+    </section>
+    <!-- features section ends -->
+
+    <!-- about section starts -->
+    <section class="about" id="about">
+      <h1 class="heading">about</h1>
+      <div class="column">
+        <div class="image">
+          <img src="{% static 'homepage/images/about.svg' %}" alt="" />
+        </div>
+        <div class="content">
+          <h3>Easy And Perfect Solution For Your Online Class Management</h3>
+          <p>Get it as part of Workspace for Education</p>
+          <p>
+            If you’re using it in school, we recommend signing up for Education
+            Workspace. It is already included in Workspace for Education and
+            works seamlessly with Workspace collaboration tools.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- about section ends -->
+
+    <!-- footer section starts -->
+    <div class="footer">
+      <div class="box-container">
+        <div class="box">
+          <h3>about us</h3>
+          <p>
+            A free and easy tool helping educators efficiently manage and assess
+            progress, while enhancing connections with learners from school,
+            from home, or on the go.
+          </p>
+        </div>
+
+        <div class="box">
+          <h3>quick links</h3>
+          <a href="#home">home</a>
+          <a href="#features">features</a>
+          <a href="#about">about</a>
+        </div>
+
+        <div class="box">
+          <h3>follow us</h3>
+          <a href="">Linkedin</a>
+          <a href="">Github</a>
+        </div>
+
+        <div class="box">
+          <h3>contact info</h3>
+          <div class="info">
+            <i class="fas fa-phone"></i>
+            <p>
+              +254790757192 <br />
+              +254701824375
+            </p>
+          </div>
+          <div class="info">
+            <i class="fas fa-envelope"></i>
+            <p>
+              emmanuelmutai247@gmail.com <br />
+              emmanuel.mutai@emobilis.co.ke
+            </p>
+          </div>
+        </div>
+      </div>
+      <h1 class="credit">&copy; copyright - 2024</h1>
+    </div>
+    <!-- footer section ends -->
+
+    <!-- Add the full-container to wrap the popups -->
+    <div class="full-container">
+      <!-- Login form modal (hidden by default) -->
+      <div class="popup-container" id="login-form">
+        <label class="close-btn fas fa-times" onclick="closeForm()"></label>
+        <div class="text">Login</div>
+        <form action="{% url 'PFES6:login' %}" method="POST">
+          {% csrf_token %}
+          <div class="data">
+            <label>Email</label>
+            <input type="email" name="email" required />
+          </div>
+          <div class="data">
+            <label>Password</label>
+            <input type="password" name="password" required />
+          </div>
+          <div class="btn-p">
+            <div class="inner"></div>
+            <button type="submit" value="login">Login</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Register form modal (hidden by default) -->
+      <div class="popup-container" id="register-form">
+        <label class="close-btn fas fa-times" onclick="closeForm()"></label>
+        <div class="text">Register</div>
+        <form
+          action="{% url 'PFES6:register' %}"
+          method="POST"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          <div class="data">
+            <label>First Name</label>
+            <input type="text" name="nom" required />
+          </div>
+          <div class="data">
+            <label>Last Name</label>
+            <input type="text" name="prenom" required />
+          </div>
+          <div class="data">
+            <label>Email</label>
+            <input type="email" name="email" required />
+          </div>
+          <div class="data">
+            <label>Password</label>
+            <input type="password" name="password" required />
+          </div>
+          <div class="data">
+            <label>Confirm Password</label>
+            <input type="password" name="password_confirm" required />
+          </div>
+          <div class="data">
+            <label>Role</label>
+            <select name="role" required>
+              <option value="s">Student</option>
+              <option value="t">Teacher</option>
+            </select>
+          </div>
+          <div class="data">
+            <label>Profile Picture</label>
+            <input type="file" name="picture" accept="image/*" required />
+          </div>
+          <div class="btn-p">
+            <div class="inner"></div>
+            <button type="submit" id="register-btn" value="register">
+              Register
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Inline JavaScript to handle popups -->
+    <script>
+      // Function to open login form
+      function openForm() {
+        const loginForm = document.getElementById("login-form");
+        const container = document.querySelector(".full-container");
+        loginForm.classList.add("active");
+        container.classList.add("active");
+
+        // Ensure register form is hidden if open
+        const registerForm = document.getElementById("register-form");
+        registerForm.classList.remove("active");
+      }
+
+      // Function to open register form
+      function openRegisterForm() {
+        const registerForm = document.getElementById("register-form");
+        const container = document.querySelector(".full-container");
+
+        // Show the register form and the full-container
+        registerForm.classList.add("active");
+        container.classList.add("active");
+
+        // Ensure login form is hidden if open
+        const loginForm = document.getElementById("login-form");
+        loginForm.classList.remove("active");
+
+        // Adjust the height of the popup container if necessary
+        const popupHeight = registerForm.offsetHeight;
+        const windowHeight = window.innerHeight;
+        if (popupHeight > windowHeight) {
+          registerForm.style.maxHeight = `${windowHeight - 40}px`; // 40px for padding
+          registerForm.style.overflowY = "auto"; // Enable scrolling if it's too tall
+        }
+      }
+
+      // Function to close the form
+      function closeForm() {
+        const loginForm = document.getElementById("login-form");
+        const registerForm = document.getElementById("register-form");
+        const container = document.querySelector(".full-container");
+        loginForm.classList.remove("active");
+        registerForm.classList.remove("active");
+        container.classList.remove("active");
+      }
+    </script>
+  </body>
+</html>
